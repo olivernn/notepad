@@ -14,6 +14,7 @@ module NotepadRails
 
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += %W(#{config.root}/app/views)
+    ActiveRecord::Base.include_root_in_json = false
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.

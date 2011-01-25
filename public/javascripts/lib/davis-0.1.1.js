@@ -56,9 +56,15 @@ Davis.listener = (function () {
    * @private
    */
   var submitHandler = handler(function () {
+    var extractFormParams = function (form) {
+      return form.serializeArray().map(function (attr) {
+        return [attr.name, attr.value].join('=')
+      }).join('&')
+    }
+
     return {
       method: this.attr('method'),
-      fullPath: [this.attr('action'), "?", this.serialize()].join(""),
+      fullPath: [this.attr('action'), extractFormParams(this)].join("?"),
       title: this.attr('title')
     };
   });
@@ -406,7 +412,7 @@ Davis.Route = (function () {
  *       // update the instance of foo with id = req.params['id']
  *     })
  *     
- *     app.delete('/foo/:id', function (req) {
+ *     app.del('/foo/:id', function (req) {
  *       // delete the instance of foo with id = req.params['id']
  *     })
  *
@@ -442,12 +448,20 @@ Davis.router = function () {
   /**
    * Generating convinience methods for creating Davis.Routes
    */
-  var verbs = ['get', 'post', 'put', 'delete'];
+  var verbs = ['get', 'post', 'put'];
   verbs.forEach(function (verb) {
     self[verb] = function (path, handler) {
       self._routeCollection.push(new Davis.Route (verb, path, handler));
     }
   })
+
+  /**
+   * delete is a reserved word in javascript so use the `del` method to
+   * creating a Davis.Route with a method of delete.
+   */
+  this.del = function (path, handler) {
+    self._routeCollection.push(new Davis.Route ('delete', path, handler))
+  }
 
   /**
    * Generating convinience methods for creating filters using Davis.Routes and methods to
@@ -661,7 +675,7 @@ Davis.Request = function (raw) {
     this.queryString.split("&").forEach(function (keyval) {
       var paramName = keyval.split("=")[0],
           paramValue = keyval.split("=")[1],
-          nestedParamRegex = /^(\w+)%5B(\w+)%5D/,
+          nestedParamRegex = /^(\w+)\[(\w+)\]/,
           nested;
 
       if (nested = nestedParamRegex.exec(paramName)) {
@@ -832,9 +846,6 @@ Davis.App = (function () {
           self.settings.logger.info("application started")
         });
 
-      this.listen();
-      this.trigger('start')
-
       var runFilterWith = function (request) {
         return function (filter) {
           var result = filter.run(request, request);
@@ -847,7 +858,7 @@ Davis.App = (function () {
                       .every(runFilterWith(request))
       }
 
-      Davis.history.onChange(function (request) {
+      var handleRequest = function (request) {
         if (beforeFiltersPass(request)) {
           self.trigger('lookupRoute', request)
           var route = self.lookupRoute(request.method, request.path);
@@ -862,9 +873,16 @@ Davis.App = (function () {
         } else {
           self.trigger('requestHalted', request)
         }
-      });
+      }
 
+      Davis.history.onChange(handleRequest);
+
+      this.listen();
+      this.trigger('start')
       this.running = true;
+
+      // handleRequest(Davis.Request.forPageLoad())
+
     },
 
     /**

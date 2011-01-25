@@ -45,7 +45,6 @@ View = function (name, a, instanceMethods) {
 
     render: function () {
       invokeCallback('beforeRender', this);
-      // console.log(this.html)
       $(settings.container).html(this.html);
     }
   };
