@@ -1,0 +1,3 @@
+NoteFormView = View("note-form", {
+  
+})

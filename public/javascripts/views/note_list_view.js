@@ -1,0 +1,3 @@
+NoteListView = View("note-list", {
+  
+})

@@ -1,0 +1,12 @@
+  <form action="{{action}}" method="post" class="note-form">
+    <input type="hidden" name="_method" value="{{method}}">
+{{#note}}
+    <div class="fields">
+      <input type="text" name="note[title]" value="{{title}}" placeholder="title">
+      <textarea name="note[body]" placeholder="body">{{body}}</textarea>
+    </div>
+    <div class="buttons">
+      <input type="submit" value="Save">
+    </div>
+  </form>
+{{/note}}
