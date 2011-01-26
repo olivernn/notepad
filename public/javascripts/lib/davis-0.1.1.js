@@ -337,8 +337,18 @@ Davis.Route = (function () {
      *     route.match('get', '/foo/12')
      */
     match: function (method, path) {
+      this.reset();
       return (this.method.test(method)) && (this.path.test(path))
     },
+
+    /**
+     * ## route.reset
+     * Resets the RegExps for method and path
+     */
+     reset: function () {
+       this.method.lastIndex = 0;
+       this.path.lastIndex = 0;
+     },
 
     /**
      * ## route.run
@@ -354,7 +364,7 @@ Davis.Route = (function () {
      *     route.run(request)
      */
     run: function (request) {
-      this.path.lastIndex = 0
+      this.reset();
       var matches = this.path.exec(request.path);
       if (matches) {
         matches.shift();
@@ -362,7 +372,6 @@ Davis.Route = (function () {
           request.params[this.paramNames[i]] = matches[i];
         };
       };
-      this.path.lastIndex = 0
       return this.callback.call(request, request);
     },
 
@@ -569,7 +578,10 @@ Davis.history = (function () {
   var wrapped = function (handler) {
     return function (event) {
       if (event.state) {
-        handler(event.state)
+        // the request that is pushed into the browser history looses its __proto__
+        var req = event.state
+        req.__proto__ = Davis.Request.prototype
+        handler(req)
       } else {
         handler(Davis.Request.forPageLoad())
       };
@@ -835,17 +847,6 @@ Davis.App = (function () {
     start: function () {
       var self = this;
 
-      this
-        .bind('runRoute', function (request) {
-          self.settings.logger.info("runRoute: " + request.toString());
-        })
-        .bind('routeNotFound', function (request) {
-          self.settings.logger.warn("routeNotFound: " + request.toString());
-        })
-        .bind('start', function () {
-          self.settings.logger.info("application started")
-        });
-
       var runFilterWith = function (request) {
         return function (filter) {
           var result = filter.run(request, request);
@@ -863,7 +864,7 @@ Davis.App = (function () {
           self.trigger('lookupRoute', request)
           var route = self.lookupRoute(request.method, request.path);
           if (route) {
-            self.trigger('runRoute', request);
+            self.trigger('runRoute', request, route);
             route.run(request);
             self.lookupAfterFilter(request.method, request.path)
                   .every(runFilterWith(request));
@@ -877,11 +878,22 @@ Davis.App = (function () {
 
       Davis.history.onChange(handleRequest);
 
+      this
+        .bind('runRoute', function (request) {
+          self.settings.logger.info("runRoute: " + request.toString());
+        })
+        .bind('routeNotFound', function (request) {
+          self.settings.logger.warn("routeNotFound: " + request.toString());
+        })
+        .bind('start', function () {
+          self.settings.logger.info("application started")
+        });
+
       this.listen();
       this.trigger('start')
       this.running = true;
 
-      // handleRequest(Davis.Request.forPageLoad())
+      handleRequest(Davis.Request.forPageLoad())
 
     },
 
