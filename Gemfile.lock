@@ -1,3 +1,8 @@
+PATH
+  remote: /Users/olivernightingale/code/walrus
+  specs:
+    walrus (0.0.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -75,3 +80,4 @@ DEPENDENCIES
   mustache
   rails (= 3.0.3)
   sqlite3-ruby
+  walrus!

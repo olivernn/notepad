@@ -1,3 +1,7 @@
+<% content_for :head do %>
+  <%= template_include_tag "note_list" %>
+<% end %>
+
 <div id="note-list-container">
   <%= render :partial => "note_list" %>
 </div>

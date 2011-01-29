@@ -4,99 +4,20 @@
   <title>NotepadRails</title>
   <%= stylesheet_link_tag :all %>
 
-  <script id="note-form-template" type="text/mustache" charset="utf-8">
-    <form action="{{action}}" method="{{method}}" class="note-form">
-      <div class="fields">
-        <input type="text" name="note[title]" value="{{title}}" placeholder="title">
-        <textarea name="note[body]" placeholder="body">{{body}}</textarea>
-      </div>
-      <div class="buttons">
-        <input type="submit" value="Save">
-        <input type="submit" value="Delete" class="delete">
-      </div>
-    </form>
-  </script>
+  <%= yield :head %>
 
-  <script id="note-list-template" type="text/mustache" charset="utf-8">
-    <ul class="note-list">
-      {{#notes}}
-        <li>
-          <h3><a href="/notes/{{id}}">{{title}}</a></h3>
-        </li>
-      {{/notes}}
-    </ul>
-    <div class='buttons'>
-      <a href="/notes/new">+</a>
-      
-      <a href="/notes/new">-</a>
-    </div>
-  </script>
+  <script src="/javascripts/vendor/jquery-1.4.4.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/javascripts/vendor/davis-0.1.1.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/javascripts/vendor/js-model-0.9.4.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/javascripts/vendor/handlebars.js" type="text/javascript" charset="utf-8"></script>
 
-  <script src="/javascripts/lib/jquery-1.4.4.min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/javascripts/lib/davis-0.1.1.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/javascripts/lib/js-model-0.9.4.min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/javascripts/lib/handlebars.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/lib/view.js" type="text/javascript" charset="utf-8"></script>
 
   <script src="/javascripts/models/note.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/views/note_form_view.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/views/note_list_view.js" type="text/javascript" charset="utf-8"></script>
-
-  <script type="text/javascript" charset="utf-8">
-    var app
-    $(document).ready(function () {
-      app = Davis(function () {
-
-        this.before(function () {
-          var noteList = new NoteListView (Note.toMustache())
-          noteList.render()
-        })
-
-        this.get('/notes', function () {
-          $('#note-form-container').html('<div id="logo"><img src="/images/logo.png"/></div>');
-        });
-
-        this.get('/notes/new', function (req) {
-          var note = new Note ()
-          var noteForm = new NoteFormView(note.toMustache())
-          noteForm.render()
-        })
-
-        this.get('/notes/:id', function (req) {
-          var note = Note.find(req.params['id'])
-          var noteForm = new NoteFormView(note.toMustache())
-          noteForm.render()
-        })
-
-        this.post('/notes', function (req) {
-          var note = new Note (req.params['note'])
-          note.save(function () {
-            req.redirect('/notes/' + this.id())
-          })
-        })
-
-        this.put('/notes/:id', function (req) {
-          var note = Note.find(req.params['id'])
-          note.attr(req.params['note'])
-          note.save(function () {
-            req.redirect('/notes/' + this.id())
-          })
-        })
-
-        this.del('/notes/:id', function (req) {
-          var note = Note.find(req.params['id'])
-          note.destroy(function () {
-            req.redirect('/notes')
-          })
-        })
-      })
-
-      Note.load(function () {
-        app.start()
-      });
-
-    })
-  </script>
+  <script src="/javascripts/app.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/javascripts/boot.js" type="text/javascript" charset="utf-8"></script>
 
   <%= csrf_meta_tag %>
 </head>
