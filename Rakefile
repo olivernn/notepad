@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-NotepadRails::Application.load_tasks
+Notepad::Application.load_tasks

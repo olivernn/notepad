@@ -7,7 +7,7 @@ gem 'rails', '3.0.3'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'mustache'
-gem 'walrus', :path => '/Users/olivernightingale/code/walrus'
+gem 'walrus', :git => 'git://github.com/olivernn/walrus.git'
 
 # Use unicorn as the web server
 # gem 'unicorn'

@@ -1,4 +1,5 @@
 NoteFormView = View("note-form", {
+
   beforeRender: function () {
     this.html
       .find(':submit.delete')

@@ -1,3 +1,3 @@
-NotepadRails::Application.routes.draw do
+Notepad::Application.routes.draw do
   resources :notes
 end

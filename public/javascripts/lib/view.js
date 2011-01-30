@@ -31,9 +31,14 @@ View = function (name, a, instanceMethods) {
   };
 
   Klass.prototype = {
+
+    container: function () {
+      return $(settings.container);
+    },
+
     reload: function (data) {
       invokeCallback('beforeReload', this);
-      if (data) { this.data = data; };
+      if (data) this.data = data;
       this.html = $(this.template(this.data));
       this.render();
     },
@@ -46,6 +51,7 @@ View = function (name, a, instanceMethods) {
     render: function () {
       invokeCallback('beforeRender', this);
       $(settings.container).html(this.html);
+      invokeCallback('beforeRender', this);
     }
   };
 

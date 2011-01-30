@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>NotepadRails</title>
+  <title>Notepad</title>
   <%= stylesheet_link_tag :all %>
 
   <%= yield :head %>
@@ -24,7 +24,7 @@
 <body>
 <div id="main">
   <div id="header">
-    <h1>Notepad</h1>
+    <h1><%= link_to "NotePad", notes_path %></h1>
   </div>
   <%= yield %>
 </div>

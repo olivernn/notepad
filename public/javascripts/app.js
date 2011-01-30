@@ -1,6 +1,6 @@
 App = Davis(function () {
 
-  this.before(function () {
+  this.bind('start', function () {
     var noteList = new NoteListView (Note.toMustache())
     noteList.render()
   })

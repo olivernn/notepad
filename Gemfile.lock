@@ -1,5 +1,6 @@
-PATH
-  remote: /Users/olivernightingale/code/walrus
+GIT
+  remote: git://github.com/olivernn/walrus.git
+  revision: a14ed9a0f7828bb6b26f62ae3d3d8c3590d4c0ad
   specs:
     walrus (0.0.1)
 
