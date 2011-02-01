@@ -2,7 +2,7 @@
 
 This is a Rails 3 application using html5 pushState with [Davis.js](http://github.com/olivernn/davis.js)
 and [Mustache](http://mustache.github.com/) templates
-via Walrus, take a look at it running [here](http://davis-example.heroku.com/notes).
+via Poirot, take a look at it running [here](http://davis-example.heroku.com/notes).
 
 The same partials are used client and server side to render the list of notes and the
 note display area of the screen, mustache makes this possible.
