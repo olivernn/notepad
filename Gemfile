@@ -8,7 +8,7 @@ gem 'rails', '3.0.3'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'mustache'
 # gem 'poirot', :path => '/Users/olivernightingale/code/poirot'
-gem 'poirot', :git => 'git://github.com/olivernn/poirot.git'
+gem 'poirot'
 
 # Use unicorn as the web server
 # gem 'unicorn'
