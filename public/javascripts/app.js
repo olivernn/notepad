@@ -1,5 +1,6 @@
 App = Davis(function () {
 
+  this.use(Davis.title)
   this.use(Davis.googleAnalytics)
   this.bind('start', function () {
     var noteList = new NoteListView (Note.toMustache())
@@ -8,6 +9,7 @@ App = Davis(function () {
 
   this.get('/notes', function () {
     $('#note-form-container').html('<div id="logo"><img src="/images/logo.png"/></div>');
+    req.setTitle('NotePad')
   });
 
   this.get('/notes/new', function (req) {
