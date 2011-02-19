@@ -1,5 +1,6 @@
 App = Davis(function () {
 
+  this.use(Davis.googleAnalytics)
   this.bind('start', function () {
     var noteList = new NoteListView (Note.toMustache())
     noteList.render()
