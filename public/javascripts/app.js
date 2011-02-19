@@ -1,13 +1,16 @@
 App = Davis(function () {
 
+  var noteList
+
   this.use(Davis.title)
   this.use(Davis.googleAnalytics)
+
   this.bind('start', function () {
-    var noteList = new NoteListView (Note.toMustache())
+    noteList = new NoteListView (Note.toMustache())
     noteList.render()
   })
 
-  this.get('/notes', function () {
+  this.get('/notes', function (req) {
     $('#note-form-container').html('<div id="logo"><img src="/images/logo.png"/></div>');
     req.setTitle('NotePad')
   });
@@ -35,6 +38,7 @@ App = Davis(function () {
     var note = Note.find(req.params['id'])
     note.attr(req.params['note'])
     note.save(function () {
+      noteList.reload(Note.toMustache())
       req.redirect('/notes/' + this.id())
     })
   })
