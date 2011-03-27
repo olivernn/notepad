@@ -10,9 +10,13 @@ App = Davis(function () {
     noteList.render()
   })
 
-  this.get('/notes', function (req) {
+  this.get('/', function (req) {
     $('#note-form-container').html('<div id="logo"><img src="/images/logo.png"/></div>');
     req.setTitle('NotePad')
+  })
+
+  this.get('/notes', function (req) {
+    req.redirect('/')
   });
 
   this.get('/notes/new', function (req) {
