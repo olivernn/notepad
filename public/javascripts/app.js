@@ -50,7 +50,7 @@ App = Davis(function () {
   this.del('/notes/:id', function (req) {
     var note = Note.find(req.params['id'])
     note.destroy(function () {
-      req.redirect('/notes')
+      req.redirect('/')
     })
   })
 })
