@@ -15,6 +15,7 @@ body {
   border-top: 1px solid #ededed;
   border-bottom: 1px solid #aeaeae;
   background-color: #e3e3e3;
+  background: -moz-linear-gradient(top, #e3e3e3, #cbcbca);
   background:-webkit-gradient(linear, left top, left bottom, from(#e3e3e3), to(#cbcbca));
   padding: 15px;
 }
@@ -68,6 +69,7 @@ body {
   border-top: 1px solid #a8a9ab;
   border-bottom: 1px solid #93a6c0;
   background-color: #abbbd2;
+  background: -moz-linear-gradient(top, #abbbd2, #8399b8);
   background:-webkit-gradient(linear, left top, left bottom, from(#abbbd2), to(#8399b8));
   color: white;
   padding: 10px;
@@ -75,6 +77,7 @@ body {
 
 .note-list li.selected {
   background-color: #9cadc2;
+  background: -moz-linear-gradient(top, #9cadc2, #788dac);
   background:-webkit-gradient(linear, left top, left bottom, from(#9cadc2), to(#788dac));
 }
 
