@@ -5,6 +5,10 @@ App = Davis(function () {
   this.use(Davis.title)
   this.use(Davis.googleAnalytics)
 
+  this.configure(function (config) {
+    config.generateRequestOnPageLoad = false
+  })
+
   this.bind('start', function () {
     noteList = new NoteListView (Note.toMustache())
     noteList.render()
