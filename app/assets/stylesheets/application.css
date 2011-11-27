@@ -1,0 +1,166 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree . 
+*/
+
+body {
+  background-color: #555;
+}
+
+#main {
+  font-family: Helvetica;
+  clear:both;
+  margin-left: auto;
+  margin-right: auto;
+  width: 960px;
+  -webkit-box-shadow: 5px 5px 15px #222;
+}
+
+#header {
+  border-top: 1px solid #ededed;
+  border-bottom: 1px solid #aeaeae;
+  background-color: #e3e3e3;
+  background: -moz-linear-gradient(top, #e3e3e3, #cbcbca);
+  background:-webkit-gradient(linear, left top, left bottom, from(#e3e3e3), to(#cbcbca));
+  padding: 15px;
+}
+
+#header h1 {
+  margin: 0px;
+  text-shadow: 0px 0px 3px #fff;
+}
+
+#header a {
+  text-decoration: none;
+  color: #333;
+}
+
+#logo {
+  opacity: 0.5;
+  margin-left: 75px;
+}
+
+#note-list-container {
+  -webkit-box-shadow: 5px 5px 15px #222;
+  position: relative;
+  height: 500px;
+  float: left;
+  width: 300px;
+  border-right: 1px solid #ccc;
+  background-color: #DEE3EA;
+  padding: 0px;
+}
+
+#note-form-container {
+  -webkit-box-shadow: 5px 5px 15px #222;
+  background-color: white;
+  position: relative;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  height: 500px;
+  float: left;
+  width: 657px;
+  padding: 0px;
+}
+
+.note-list {
+  list-style:none;
+  margin: 0px;
+  padding: 0px;
+  border-bottom: 1px solid #ccc;
+}
+
+.note-list li {
+  border-top: 1px solid #a8a9ab;
+  border-bottom: 1px solid #93a6c0;
+  background-color: #abbbd2;
+  background: -moz-linear-gradient(top, #abbbd2, #8399b8);
+  background:-webkit-gradient(linear, left top, left bottom, from(#abbbd2), to(#8399b8));
+  color: white;
+  padding: 10px;
+}
+
+.note-list li.selected {
+  background-color: #9cadc2;
+  background: -moz-linear-gradient(top, #9cadc2, #788dac);
+  background:-webkit-gradient(linear, left top, left bottom, from(#9cadc2), to(#788dac));
+}
+
+.note-list li h3 {
+  margin: 0px;
+  font-weight: normal;
+  font-size: 1.4em;
+  text-shadow: 0px 0px 3px #73839A;
+}
+
+.note-list li h3 a {
+  color: white;
+  text-decoration: none;
+}
+
+.note-form input[type="text"] {
+  color: #333;
+  width: 635px;
+  padding: 10px;
+  font-size: 1.4em;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  display: block;
+  margin: 0px;
+}
+
+.note-form textarea {
+  color: #333;
+  width: 635px;
+  height: 387px;
+  padding: 10px;
+  font-size: 1.4em;
+  border: none;
+  border-top: 1px solid #eee;
+  display: block;
+  margin: 0px;
+}
+.note-form .fields {
+  border-bottom: 1px solid #ccc;
+}
+
+#note-form-container .buttons {
+  width: 645px;
+}
+
+.buttons {
+  height: 33px;
+  position: absolute;
+  bottom: 0px;
+  width: 290px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  background:-webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#ffffff));
+  padding: 5px;
+}
+
+.buttons a {
+  display: inline-block;
+  font-size: 1.2em;
+  padding: 6px 10px;
+  text-decoration: none;
+  line-height: 1;
+  background:-webkit-gradient(linear, left top, left bottom, from(#e9e9e9), to(#f9f9f9));
+  border: 1px solid #999;
+  -webkit-border-radius: 3px;
+}
+
+.buttons input[type="submit"] {
+  float: right;
+  display: inline-block;
+  font-size: 1.2em;
+  padding: 6px 10px;
+  text-decoration: none;
+  line-height: 1;
+  background:-webkit-gradient(linear, left top, left bottom, from(#e9e9e9), to(#f9f9f9));
+  border: 1px solid #999;
+  -webkit-border-radius: 3px;
+}
