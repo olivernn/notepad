@@ -11,7 +11,7 @@ App = Davis(function () {
   })
 
   this.get('/', function (req) {
-    $('#note-form-container').html('<div id="logo"><img src="/images/logo.png"/></div>');
+    $('#note-form-container').html('<div id="logo"><%= image_tag "logo.png"  %></div>');
     req.setTitle('NotePad')
   })
 
